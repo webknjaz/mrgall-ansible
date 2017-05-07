@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: dokku
   roles:
   - role: yoshzz.dokku
     dokku_vhost: dokku.mrgall.com
