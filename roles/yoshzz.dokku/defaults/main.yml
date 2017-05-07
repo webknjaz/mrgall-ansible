@@ -1,0 +1,3 @@
+dokku_version: "0.3.7"
+dokku_vhost: "{{ hostname }}"
+dokku_plugins: []

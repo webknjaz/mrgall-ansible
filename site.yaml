@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  roles:
+  - role: yoshzz.dokku
+    dokku_vhost: dokku.mrgall.com
+    dokku_version: 0.9.4
+    dokku_plugins:
+    - name: docker-options
+      repo: https://github.com/dyson/dokku-docker-options.git
+  - role: sshkeys
+    sshkeys:
+    - name: '@webknjaz'
+      value: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKfVXabLvtPE8LhoD1+CjZ0hQHLq24eYo3fqFxGfp9IWNN8pXUQH1VpiSs9qd+YQH2KeiJubXaLG61fm+hRLreNn8HLu1sQEgmeLjl2IREk/yrfEWiPuoboN90KHy187gK515yVQmx1HFqQ9112fpVhnbyU/4D2sx07kpUDIR97OC1NW+XQjlWF0+tRh1xU+EEALQbzSVBLobz0DNlUPzDg2vNLbIcYSGvfiYGyj5Opb/tnK3JNN8EzYxZInBcVE52oLOYM3jPkiVWUuTFp5zq12JCiGXrxiPA4KtB/QjD6CbVHBc+eDMTFqMD26CjAuaSg6O/nCY7CSapESxDuVfd wk@wk-laptop
+  - role: thefinn93.letsencrypt
+    letsencrypt_webroot_path: /var/www/html
+    letsencrypt_email: mrgall@mrgall.com
+    letsencrypt_cert_domains:
+    - www.mrgall.com
+    - mrgall.com
+    - www.gdg.org.ua
+    - gdg.org.ua
+    - www.dev.gdg.org.ua
+    - dev.gdg.org.ua
+    letsencrypt_renewal_command_args: 
+    - --renew-hook "systemctl restart nginx"
+
