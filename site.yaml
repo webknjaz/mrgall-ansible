@@ -2,6 +2,7 @@
 
 - hosts: dokku
   roles:
+  - role: acl
   - role: yoshzz.dokku
     dokku_vhost: linode.mrgall.com
     dokku_version: 0.9.4
