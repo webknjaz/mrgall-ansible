@@ -1,7 +1,8 @@
 mrgall dokku host
 =================
 This is a set of ansible playbooks for controlling new dokku host.
-To start copy id_rsa_mrgall SSH private key into this dir.
+To start copy id_rsa_mrgall SSH private key into this dir. Alternatively
+override per-host vars as in example below.
 
 
 Prerequisites:
@@ -18,4 +19,4 @@ Run:
 .. code:: shell
    :number-lines:
 
-    $ ansible-playbook -i hosts site.yaml
+    $ ansible-playbook -i hosts site.yaml  -e "ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_ssh_user=$USER"
