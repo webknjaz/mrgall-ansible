@@ -1,0 +1,8 @@
+---
+# Needed as a workafound for
+# https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user
+# Ref: http://stackoverflow.com/a/37096534/595220
+
+- name: install setfacl support
+  become: yes
+  apt: pkg=acl
