@@ -1,6 +1,11 @@
 ---
 
+- name: Remove dokku users' ssh keys
+  become: yes
+  shell: dokku ssh-keys:remove {{ item }}
+  with_items: "{{ remove_dokku_users }}"
+
 - name: Add dokku users' ssh keys
   become: yes
-  shell: echo "{{ item.value }}" | dokku ssh-keys:add {{ item.name }}
-  with_items: "{{ sshkeys }}"
+  shell: echo "{{ item.ssh_public_key }}" | dokku ssh-keys:add {{ item.name }}
+  with_items: "{{ add_dokku_users }}"
