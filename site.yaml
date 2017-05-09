@@ -8,10 +8,12 @@
     dokku_vhost: linode.mrgall.com
     dokku_version: 0.9.4
     dokku_plugins:
-    - name: docker-options
-      repo: https://github.com/dyson/dokku-docker-options.git
     - name: acl
       repo: https://github.com/dokku-community/dokku-acl.git
+    - name: docker-options
+      repo: https://github.com/dyson/dokku-docker-options.git
+    - name: letsencrypt
+      repo: https://github.com/dokku/dokku-letsencrypt.git
 
   - role: dokku_users
     remove_dokku_users:  # to replace them later
