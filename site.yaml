@@ -10,6 +10,8 @@
     dokku_plugins:
     - name: docker-options
       repo: https://github.com/dyson/dokku-docker-options.git
+    - name: acl
+      repo: https://github.com/dokku-community/dokku-acl.git
 
   - role: sshkeys
     sshkeys:
