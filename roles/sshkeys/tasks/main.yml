@@ -2,5 +2,5 @@
 
 - name: Add dokku users' ssh keys
   become: yes
-  shell: echo "{{ item.value }}" | sshcommand acl-add dokku {{ item.name }}
+  shell: echo "{{ item.value }}" | dokku ssh-keys:add {{ item.name }}
   with_items: "{{ sshkeys }}"
