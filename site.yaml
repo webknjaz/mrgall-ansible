@@ -13,7 +13,7 @@
     - name: acl
       repo: https://github.com/dokku-community/dokku-acl.git
 
-  - role: sshkeys
+  - role: dokku_users
     remove_dokku_users:  # to replace them later
     - wk
     - mrgall
