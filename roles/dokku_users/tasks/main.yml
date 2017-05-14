@@ -7,5 +7,8 @@
 
 - name: Add dokku users' ssh keys
   become: yes
-  shell: echo "{{ item.ssh_public_key }}" | dokku ssh-keys:add {{ item.name }}
+  shell: echo "{{ item.ssh_public_key }}" | dokku ssh-keys:add "{{ item.name }}"
+  register: useradd_cmd
+  changed_when: useradd_cmd.rc == 0 or (useradd_cmd.rc != 0 and 'Duplicate SSH Key name' not in useradd_cmd.stderr)
+  failed_when: useradd_cmd.rc != 0 and 'Duplicate SSH Key name' not in useradd_cmd.stderr
   with_items: "{{ add_dokku_users }}"

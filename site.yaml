@@ -16,9 +16,7 @@
       repo: https://github.com/dokku/dokku-letsencrypt.git
 
   - role: dokku_users
-    remove_dokku_users:  # to replace them later
-    - wk
-    - mrgall
+    remove_dokku_users: []
     add_dokku_users:
     - name: wk
       ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKfVXabLvtPE8LhoD1+CjZ0hQHLq24eYo3fqFxGfp9IWNN8pXUQH1VpiSs9qd+YQH2KeiJubXaLG61fm+hRLreNn8HLu1sQEgmeLjl2IREk/yrfEWiPuoboN90KHy187gK515yVQmx1HFqQ9112fpVhnbyU/4D2sx07kpUDIR97OC1NW+XQjlWF0+tRh1xU+EEALQbzSVBLobz0DNlUPzDg2vNLbIcYSGvfiYGyj5Opb/tnK3JNN8EzYxZInBcVE52oLOYM3jPkiVWUuTFp5zq12JCiGXrxiPA4KtB/QjD6CbVHBc+eDMTFqMD26CjAuaSg6O/nCY7CSapESxDuVfd wk@wk-laptop
@@ -35,3 +33,5 @@
     - dev.gdg.org.ua
     letsencrypt_renewal_command_args: 
     - --renew-hook "systemctl restart nginx"
+
+# vim: ft=ansible:
