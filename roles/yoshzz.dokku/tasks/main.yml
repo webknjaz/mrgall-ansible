@@ -13,9 +13,10 @@
   become_user: dokku
   become_method: sudo
 
-- name: "Install plugins"
-  git: repo="{{ item.repo }}" dest="/var/lib/dokku/plugins/{{ item.name }}" accept_hostkey=yes version="{{ item.version|default('master') }}"
-  with_items: "{{ dokku_plugins }}"
+- name: Install plugins
   become: yes
-  become_user: dokku
-  become_method: sudo
+  shell: dokku plugin:install "{{ item.repo }}" "{{ item.name }}"
+  register: pluginadd_cmd
+  changed_when: pluginadd_cmd.rc == 0 or (pluginadd_cmd.rc != 0 and 'already exists and is not an empty directory.' not in pluginadd_cmd.stderr)
+  failed_when: pluginadd_cmd.rc != 0 and 'already exists and is not an empty directory.' not in pluginadd_cmd.stderr
+  with_items: "{{ dokku_plugins }}"
