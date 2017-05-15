@@ -1,0 +1,26 @@
+---
+
+- name: Create dokku apps
+  shell: dokku apps:create {{ item.name }}
+  register: appadd_cmd
+  changed_when: appadd_cmd.rc == 0 or (appadd_cmd.rc != 0 and 'Name is already taken' not in appadd_cmd.stderr_lines)
+  failed_when: appadd_cmd.rc != 0 and 'Name is already taken' not in appadd_cmd.stderr_lines
+  with_items: "{{ apps }}"
+
+- name: Drop users from write ACL for dokku apps
+  shell: dokku acl:remove {{ item.0.name }} {{ item.1 }}
+  register: appacldel_cmd
+  changed_when: appacldel_cmd.rc != 1
+  failed_when: appacldel_cmd.rc > 1
+  with_subelements:
+  - "{{ apps }}"
+  - remove_acl_users
+
+- name: Set up ACL for dokku apps
+  shell: dokku acl:add {{ item.0.name }} {{ item.1 }}
+  register: appacladd_cmd
+  changed_when: appacladd_cmd.rc == 0 or (appacladd_cmd.rc != 0 and 'User already has permissions to push to this repository' not in appacladd_cmd.stderr_lines)
+  failed_when: appacladd_cmd.rc != 0 and 'User already has permissions to push to this repository' not in appacladd_cmd.stderr_lines
+  with_subelements:
+  - "{{ apps }}"
+  - acl_users
