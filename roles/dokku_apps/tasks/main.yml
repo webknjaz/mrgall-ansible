@@ -14,12 +14,12 @@
 
 - name: Set up Let's Encrypt emails for dokku apps
   shell: dokku config:set --no-restart {{ item.name }} DOKKU_LETSENCRYPT_EMAIL={{ item.email }}
-  when: "{{ item.ssl }}"
+  when: item.ssl
   with_items: "{{ apps }}"
 
 - name: Set up SSL for all FQDNs of dokku apps
   shell: dokku letsencrypt {{ item.name }}
-  when: "{{ item.ssl }}"
+  when: item.ssl
   with_items: "{{ apps }}"
 
 - name: Schedule Let's Encrypt SSL certificates auto-renewal for all FQDNs of dokku apps
