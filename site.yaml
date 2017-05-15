@@ -29,11 +29,13 @@
       remove_acl_users: []
       acl_users:
       - wk
-      domains: &gdg_domains
+      domains:
       - www.gdg.org.ua
       - gdg.org.ua
       - www.dev.gdg.org.ua
       - dev.gdg.org.ua
+      ssl: true
+      email: mrgall@mrgall.com
 
   - role: thefinn93.letsencrypt
     letsencrypt_webroot_path: /var/www/html

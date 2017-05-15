@@ -12,6 +12,19 @@
   shell: dokku domains:set {{ item.name }} {{ item.domains | join(' ') }}
   with_items: "{{ apps }}"
 
+- name: Set up Let's Encrypt emails for dokku apps
+  shell: dokku config:set --no-restart {{ item.name }} DOKKU_LETSENCRYPT_EMAIL={{ item.email }}
+  when: "{{ item.ssl }}"
+  with_items: "{{ apps }}"
+
+- name: Set up SSL for all FQDNs of dokku apps
+  shell: dokku letsencrypt {{ item.name }}
+  when: "{{ item.ssl }}"
+  with_items: "{{ apps }}"
+
+- name: Schedule Let's Encrypt SSL certificates auto-renewal for all FQDNs of dokku apps
+  shell: dokku letsencrypt:cron-job --add
+
 - name: Drop users from write ACL for dokku apps
   shell: dokku acl:remove {{ item.0.name }} {{ item.1 }}
   register: appacldel_cmd
