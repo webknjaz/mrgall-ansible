@@ -14,6 +14,8 @@
       repo: https://github.com/dyson/dokku-docker-options.git
     - name: letsencrypt
       repo: https://github.com/dokku/dokku-letsencrypt.git
+    - name: maintenance
+      repo: https://github.com/dokku/dokku-maintenance.git
 
   - role: dokku_users
     remove_dokku_users: []
