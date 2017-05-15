@@ -45,10 +45,16 @@
 
 - name: Set up MariaDB (MySQL fork) for dokku apps
   shell: dokku mariadb:create {{ item.name }}
+  register: mariadbadd_cmd
+  changed_when: mariadbadd_cmd.rc == 0 or (mariadbadd_cmd.rc != 0 and 'already exists' not in mariadbadd_cmd.stderr)
+  failed_when: mariadbadd_cmd.rc != 0 and 'already exists' not in mariadbadd_cmd.stderr
   when: item.mariadb
   with_items: "{{ apps }}"
 
 - name: Associate MariaDB with dokku apps
   shell: dokku mariadb:link {{ item.name }} {{ item.name }}
+  register: mariadblink_cmd
+  changed_when: mariadblink_cmd.rc == 0 or (mariadblink_cmd.rc != 0 and 'Already linked as DATABASE_URL' not in mariadblink_cmd.stderr_lines)
+  failed_when: mariadblink_cmd.rc != 0 and 'Already linked as DATABASE_URL' not in mariadblink_cmd.stderr_lines
   when: item.mariadb
   with_items: "{{ apps }}"
