@@ -37,15 +37,4 @@
       ssl: true
       email: mrgall@mrgall.com
 
-  - role: thefinn93.letsencrypt
-    letsencrypt_webroot_path: /var/www/html
-    letsencrypt_email: mrgall@mrgall.com
-    letsencrypt_cert_domains:
-    - www.gdg.org.ua
-    - gdg.org.ua
-    - www.dev.gdg.org.ua
-    - dev.gdg.org.ua
-    letsencrypt_renewal_command_args: 
-    - --renew-hook "systemctl restart nginx"
-
 # vim: ft=ansible:
