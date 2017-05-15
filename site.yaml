@@ -16,6 +16,8 @@
       repo: https://github.com/dokku/dokku-letsencrypt.git
     - name: maintenance
       repo: https://github.com/dokku/dokku-maintenance.git
+    - name: mariadb
+      repo: https://github.com/dokku/dokku-mariadb.git
 
   - role: dokku_users
     remove_dokku_users: []
@@ -36,6 +38,7 @@
       - gdg.org.ua
       - www.dev.gdg.org.ua
       - dev.gdg.org.ua
+      mariadb: true
       ssl: true
       email: mrgall@mrgall.com
 

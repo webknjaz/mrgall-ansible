@@ -42,3 +42,13 @@
   with_subelements:
   - "{{ apps }}"
   - acl_users
+
+- name: Set up MariaDB (MySQL fork) for dokku apps
+  shell: dokku mariadb:create {{ item.name }}
+  when: item.mariadb
+  with_items: "{{ apps }}"
+
+- name: Associate MariaDB with dokku apps
+  shell: dokku mariadb:link {{ item.name }} {{ item.name }}
+  when: item.mariadb
+  with_items: "{{ apps }}"
