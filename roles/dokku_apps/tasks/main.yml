@@ -7,6 +7,11 @@
   failed_when: appadd_cmd.rc != 0 and 'Name is already taken' not in appadd_cmd.stderr_lines
   with_items: "{{ apps }}"
 
+# There's no need to have domain removal task as it's utilized with this action
+- name: Set up FQDNs for dokku apps
+  shell: dokku domains:set {{ item.name }} {{ item.domains | join(' ') }}
+  with_items: "{{ apps }}"
+
 - name: Drop users from write ACL for dokku apps
   shell: dokku acl:remove {{ item.0.name }} {{ item.1 }}
   register: appacldel_cmd
