@@ -5,7 +5,7 @@
   - role: acl
 
   - role: yoshzz.dokku
-    dokku_vhost: linode.mrgall.com
+    dokku_vhost: dokku.mrgall.com
     dokku_version: 0.9.4
     dokku_plugins:
     - name: acl
