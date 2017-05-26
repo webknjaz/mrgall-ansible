@@ -32,6 +32,9 @@
   - role: dokku_apps
     apps:
     - name: gdg.org.ua
+      env_vars:
+        - ENV=production
+        - &setuptools_app_ver SETUPTOOLS_SCM_PRETEND_VERSION=1
       remove_acl_users: []
       acl_users: &gdg_acl_deployers
       - gdg-autodeployer-bot
@@ -43,6 +46,9 @@
       ssl: true
       email: &letsencrypt_email mrgall@mrgall.com
     - name: dev.gdg.org.ua
+      env_vars:
+        - ENV=
+        - *setuptools_app_ver
       remove_acl_users: []
       acl_users: *gdg_acl_deployers
       domains:
