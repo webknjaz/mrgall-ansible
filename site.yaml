@@ -33,16 +33,23 @@
     apps:
     - name: gdg.org.ua
       remove_acl_users: []
-      acl_users:
+      acl_users: &gdg_acl_deployers
       - gdg-autodeployer-bot
       - wk
       domains:
-      - www.gdg.org.ua
       - gdg.org.ua
-      - www.dev.gdg.org.ua
-      - dev.gdg.org.ua
+      - www.gdg.org.ua
       mariadb: true
       ssl: true
-      email: mrgall@mrgall.com
+      email: &letsencrypt_email mrgall@mrgall.com
+    - name: dev.gdg.org.ua
+      remove_acl_users: []
+      acl_users: *gdg_acl_deployers
+      domains:
+      - dev.gdg.org.ua
+      - www.dev.gdg.org.ua
+      mariadb: true
+      ssl: true
+      email: *letsencrypt_email
 
 # vim: ft=ansible:
