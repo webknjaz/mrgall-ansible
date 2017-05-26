@@ -7,6 +7,12 @@
   failed_when: appadd_cmd.rc != 0 and 'Name is already taken' not in appadd_cmd.stderr_lines
   with_items: "{{ apps }}"
 
+- name: Set up env vars for dokku apps
+  shell: dokku config:set --no-restart {{ item.0.name }} {{ item.1 }}
+  with_subelements:
+  - "{{ apps }}"
+  - env_vars
+
 # There's no need to have domain removal task as it's utilized with this action
 - name: Set up FQDNs for dokku apps
   shell: dokku domains:set {{ item.name }} {{ item.domains | join(' ') }}
