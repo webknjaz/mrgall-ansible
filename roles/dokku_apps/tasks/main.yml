@@ -57,6 +57,24 @@
   when: item.mariadb
   with_items: "{{ apps }}"
 
+- name: Set up backups cron job for {{ item.name }} MariaDB service
+  become: yes
+  become_method: sudo
+  cron:
+    minute: 3
+    hour: 3
+    day: '*'
+    month: '*'
+    weekday: '*'
+    job: "dokku postgres:export {{ item.name }} | gzip -9 > \"/tmp/dokku_mariadb_{{ item.name }}_db_$(date +\"%Y_%m_%d_%I_%M_%p\").dump.gz\""
+    name: "backup-dokku-mariadb-{{ item.name }}"
+    cron_file: "dokku-mariadb-{{ item.name }}"
+    backup: yes
+    state: present
+    user: root
+  when: item.mariadb
+  with_items: "{{ apps }}"
+
 - name: Associate MariaDB with dokku apps
   shell: dokku mariadb:link {{ item.name }} {{ item.name }}
   register: mariadblink_cmd
