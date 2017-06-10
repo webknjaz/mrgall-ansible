@@ -4,6 +4,8 @@
   roles:
   - role: acl
 
+  - role: security
+
   - role: yoshzz.dokku
     dokku_vhost: dokku.mrgall.com
     dokku_version: 0.9.4

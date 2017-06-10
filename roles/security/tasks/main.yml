@@ -1,0 +1,5 @@
+---
+
+- name: install fail2ban
+  become: yes
+  apt: pkg=fail2ban
