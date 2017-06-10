@@ -57,7 +57,7 @@
   when: item.mariadb
   with_items: "{{ apps }}"
 
-- name: Set up backups cron job for {{ item.name }} MariaDB service
+- name: Set up backup cron jobs for MariaDB services
   become: yes
   become_method: sudo
   cron:
