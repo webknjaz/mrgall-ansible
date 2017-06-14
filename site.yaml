@@ -38,6 +38,9 @@
         - ENV=production
         - &setuptools_app_ver SETUPTOOLS_SCM_PRETEND_VERSION=1
         - BASE_APP_URL=https://gdg.org.ua
+        - &gdg_app_cwd APP_ROOT=/app
+        - &gdg_cache_dir CACHE_ROOT=/app/.cache
+        - &gdg_tmpl_dir TEMPLATES_ROOT=/app/src/GDGUkraine/templates
         # Google creds:
         - &gapp_id !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -56,6 +59,15 @@
           3461316536353231350a613637646636326430623933343836636263356632653335636135386463
           34616139396338346162353132646562346237333033633763643339386563643362316466363332
           3862653164343766323638333830383733323866336536353035
+        - &card_crypt_key !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35303733363234626433616435396536383132363134643036643961333437333937336461363838
+          6435326431306262373862666535656634656230623164340a396139383639323862313939346335
+          36653665653962356561666535366639666466373533643830363361333232303766366562363239
+          6337623231323736370a303737306235396366663035316136383338616561353530313132316239
+          65376237643738303335363763303262646234643435343961306661663665633636363334393962
+          62383365613961343434656134623239663163633132303039313139613031356338633562636664
+          636164626633376131303735663039633263
       remove_acl_users: []
       acl_users: &gdg_acl_deployers
       - gdg-autodeployer-bot
@@ -71,8 +83,12 @@
         - ENV=
         - *setuptools_app_ver
         - BASE_APP_URL=https://dev.gdg.org.ua
+        - *gdg_app_cwd
+        - *gdg_cache_dir
+        - *gdg_tmpl_dir
         - *gapp_id
         - *gapp_secret
+        - *card_crypt_key
       remove_acl_users: []
       acl_users: *gdg_acl_deployers
       domains:
