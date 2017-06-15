@@ -8,10 +8,13 @@ override per-host vars as in example below.
 Prerequisites:
 --------------
 
+Install ansible and drop a vault password file inplace:
+
 .. code:: shell
    :number-lines:
 
-    $ pip install ansible
+    $ pip install 'ansible>2.3.1'
+    $ vim .vault_pass
 
 Run:
 ----
