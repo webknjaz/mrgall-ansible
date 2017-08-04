@@ -66,9 +66,9 @@
     day: '*'
     month: '*'
     weekday: '*'
-    job: "dokku postgres:export {{ item.name }} | gzip -9 > \"/tmp/dokku_mariadb_{{ item.name }}_db_$(date +\"%Y_%m_%d_%I_%M_%p\").dump.gz\""
+    job: "dokku mariadb:export {{ item.name }} | gzip -9 > /tmp/dokku_mariadb_{{ item.name }}_db_`date +\\%Y_\\%m_\\%d_\\%I_\\%M_\\%p`.dump.gz"
     name: "backup-dokku-mariadb-{{ item.name }}"
-    cron_file: "dokku-mariadb-{{ item.name }}"
+    cron_file: "dokku-mariadb-{{ item.name | replace('.', '_') }}"
     backup: yes
     state: present
     user: root
