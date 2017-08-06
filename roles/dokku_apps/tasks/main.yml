@@ -57,6 +57,16 @@
   when: item.mariadb
   with_items: "{{ apps }}"
 
+- name: Create backup directory for MariaDB dumps
+  become: yes
+  become_method: sudo
+  file:
+    path: "{{ mariadb_backup_dir }}"
+    state: directory
+    mode: 0640
+    owner: root
+    group: root
+
 - name: Set up backup cron jobs for MariaDB services
   become: yes
   become_method: sudo
@@ -66,7 +76,7 @@
     day: '*'
     month: '*'
     weekday: '*'
-    job: "dokku mariadb:export {{ item.name }} | gzip -9 > /tmp/dokku_mariadb_{{ item.name }}_db_`date +\\%Y_\\%m_\\%d_\\%I_\\%M_\\%p`.dump.gz"
+    job: "dokku mariadb:export {{ item.name }} | gzip -9 > {{ mariadb_backup_dir }}/mariadb_{{ item.name }}_db_`date +\\%Y_\\%m_\\%d_\\%I_\\%M_\\%p`.dump.gz"
     name: "backup-dokku-mariadb-{{ item.name }}"
     cron_file: "dokku-mariadb-{{ item.name | replace('.', '_') }}"
     backup: yes

@@ -32,6 +32,7 @@
       ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFFzDPvc8875TegWwPNzBv1ZS21sEs+7XVvweFO6kUqOmWoThdlQBr4nTHIYXFVVvJ9VWmtL9sWjpJtK30xLRdsoe91N/9FyAZWQsN6pmPGU2MvUbKnaWGoa6q3s3uc6x2Vg/X9RcOlrDCxhvXzBY4xLQZGL8qRaeqvAQwH9yrpLeTK663QwLEjjardUVkQYe7CzaEJY/zAmdzDXUT0j0UnGK9LPjVU+CKiIyewIL7Cz+HDfucURysQDGINW3flVGH73Mf2RJOKYRaPaHrI97zDZGWPJptwGViQQikryZmJ58mhUhu2rYsuElIs0WVczJb8hCrfq3kcp7ps+JeVxRNKF0gqI3aqJ4mwM87KAB3Fiqr0Ho4LM3iIfm51/pL6XqknZSqKSzLxOXOV+G4pNQJ3QSXs8VcYSc/AYN6lR+cZtvTYt4s36vamUsgrMZP5YaJpDGsrI4HQz96Zm64p1LwAG7hU2nuVxMnun0z33SuySMVJZ8H6qK5q+wwMuI2qALs/rf+QDzIq0F0XiBYVK/9EAP38tNmE87zy6GCasOG3xhwfefLJxqI9jv9WeWyLCCIh9JKmb9NVBN3+Gqt9rzBR7c8dkKZAnORg6zsIv1VlDSXBWQBAlWeFj85nLx1nkVvKSd3oXiL1dNdDG/fg32q7KZMsVCO9d8GPZOPdBoWbQ== mrgall@home.mrgall.com
 
   - role: dokku_apps
+    mariadb_backup_dir: /var/lib/dokku/backups/mariadb
     apps:
     - name: gdg.org.ua
       env_vars:
