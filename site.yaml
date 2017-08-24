@@ -2,8 +2,6 @@
 
 - hosts: dokku
   roles:
-  - role: rclone
-
   - role: acl
 
   - role: security
