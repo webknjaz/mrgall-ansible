@@ -7,6 +7,40 @@
   failed_when: appadd_cmd.rc != 0 and 'Name is already taken' not in appadd_cmd.stderr_lines
   with_items: "{{ apps }}"
 
+- name: Create plugins dir for wordpress apps
+  become: yes
+  become_method: sudo
+  file:
+    path: "/var/lib/dokku/data/storage/{{ item.name }}-plugins"
+    state: directory
+    mode: 0640
+    owner: 32767
+    group: 32767
+  when: item.wordpress
+  with_items: "{{ apps }}"
+
+- name: Create uploads dir for wordpress apps
+  become: yes
+  become_method: sudo
+  file:
+    path: "/var/lib/dokku/data/storage/{{ item.name }}-uploads"
+    state: directory
+    mode: 0640
+    owner: 32767
+    group: 32767
+  when: item.wordpress
+  with_items: "{{ apps }}"
+
+- name: Mount plugins storage for wordpress apps
+  shell: dokku storage:mount {{ item.name }} /var/lib/dokku/data/storage/{{ item.name }}-plugins:/app/wp-content/plugins
+  when: item.wordpress
+  with_items: "{{ apps }}"
+
+- name: Mount uploads storage for wordpress apps
+  shell: dokku storage:mount {{ item.name }} /var/lib/dokku/data/storage/{{ item.name }}-uploads:/app/wp-content/uploads
+  when: item.wordpress
+  with_items: "{{ apps }}"
+
 - name: Set up env vars for dokku apps
   shell: dokku config:set --no-restart {{ item.0.name }} {{ item.1 }}
   with_subelements:
@@ -54,7 +88,7 @@
   register: mariadbadd_cmd
   changed_when: mariadbadd_cmd.rc == 0 or (mariadbadd_cmd.rc != 0 and 'already exists' not in mariadbadd_cmd.stderr)
   failed_when: mariadbadd_cmd.rc != 0 and 'already exists' not in mariadbadd_cmd.stderr
-  when: item.mariadb
+  when: item.mariadb or item.wordpress
   with_items: "{{ apps }}"
 
 - name: Create backup directory for MariaDB dumps

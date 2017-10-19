@@ -98,6 +98,24 @@
       mariadb: true
       ssl: true
       email: *letsencrypt_email
+    - name: kyiv.gdg.org.ua
+      env_vars:
+      - AUTH_KEY=
+      - SECURE_AUTH_KEY=
+      - LOGGED_IN_KEY=
+      - NONCE_KEY=
+      - AUTH_SALT=
+      - SECURE_AUTH_SALT=
+      - LOGGED_IN_SALT=
+      - NONCE_SALT=
+      remove_acl_users: []
+      acl_users: *gdg_acl_deployers
+      domains:
+      - kyiv.gdg.org.ua
+      - www.kyiv.gdg.org.ua
+      wordpress: true
+      ssl: true
+      email: *letsencrypt_email
 
   - role: ansible-role-rclone
     become: yes
