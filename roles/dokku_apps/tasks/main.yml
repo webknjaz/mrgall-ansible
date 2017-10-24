@@ -13,7 +13,7 @@
   file:
     path: "/var/lib/dokku/data/storage/{{ item.name }}-plugins"
     state: directory
-    mode: 0640
+    mode: u=rwx,g=rx,o=
     owner: 32767
     group: 32767
   when: item.wordpress|default(False)
@@ -25,7 +25,7 @@
   file:
     path: "/var/lib/dokku/data/storage/{{ item.name }}-uploads"
     state: directory
-    mode: 0640
+    mode: u=rwx,g=rx,o=
     owner: 32767
     group: 32767
   when: item.wordpress|default(False)
