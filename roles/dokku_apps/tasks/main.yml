@@ -16,7 +16,7 @@
     mode: 0640
     owner: 32767
     group: 32767
-  when: item.wordpress
+  when: item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Create uploads dir for wordpress apps
@@ -28,17 +28,17 @@
     mode: 0640
     owner: 32767
     group: 32767
-  when: item.wordpress
+  when: item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Mount plugins storage for wordpress apps
   shell: dokku storage:mount {{ item.name }} /var/lib/dokku/data/storage/{{ item.name }}-plugins:/app/wp-content/plugins
-  when: item.wordpress
+  when: item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Mount uploads storage for wordpress apps
   shell: dokku storage:mount {{ item.name }} /var/lib/dokku/data/storage/{{ item.name }}-uploads:/app/wp-content/uploads
-  when: item.wordpress
+  when: item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Set up env vars for dokku apps
@@ -88,7 +88,7 @@
   register: mariadbadd_cmd
   changed_when: mariadbadd_cmd.rc == 0 or (mariadbadd_cmd.rc != 0 and 'already exists' not in mariadbadd_cmd.stderr)
   failed_when: mariadbadd_cmd.rc != 0 and 'already exists' not in mariadbadd_cmd.stderr
-  when: item.mariadb or item.wordpress
+  when: item.mariadb|default(False) or item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Create backup directory for MariaDB dumps
@@ -116,7 +116,7 @@
     backup: yes
     state: present
     user: root
-  when: item.mariadb
+  when: item.mariadb|default(False) or item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Associate MariaDB with dokku apps
@@ -124,5 +124,5 @@
   register: mariadblink_cmd
   changed_when: mariadblink_cmd.rc == 0 or (mariadblink_cmd.rc != 0 and 'Already linked as DATABASE_URL' not in mariadblink_cmd.stderr_lines)
   failed_when: mariadblink_cmd.rc != 0 and 'Already linked as DATABASE_URL' not in mariadblink_cmd.stderr_lines
-  when: item.mariadb
+  when: item.mariadb|default(False) or item.wordpress|default(False)
   with_items: "{{ apps }}"
