@@ -33,11 +33,17 @@
 
 - name: Mount plugins storage for wordpress apps
   shell: dokku storage:mount {{ item.name }} /var/lib/dokku/data/storage/{{ item.name }}-plugins:/app/wp-content/plugins
+  register: wp_plugins_mount_cmd
+  changed_when: wp_plugins_mount_cmd.rc == 0 or (wp_plugins_mount_cmd.rc != 0 and 'Mount path already exists.' not in wp_plugins_mount_cmd.stderr_lines)
+  failed_when: wp_plugins_mount_cmd.rc != 0 and 'Mount path already exists.' not in wp_plugins_mount_cmd.stderr_lines
   when: item.wordpress|default(False)
   with_items: "{{ apps }}"
 
 - name: Mount uploads storage for wordpress apps
   shell: dokku storage:mount {{ item.name }} /var/lib/dokku/data/storage/{{ item.name }}-uploads:/app/wp-content/uploads
+  register: wp_uploads_mount_cmd
+  changed_when: wp_uploads_mount_cmd.rc == 0 or (wp_uploads_mount_cmd.rc != 0 and 'Mount path already exists.' not in wp_uploads_mount_cmd.stderr_lines)
+  failed_when: wp_uploads_mount_cmd.rc != 0 and 'Mount path already exists.' not in wp_uploads_mount_cmd.stderr_lines
   when: item.wordpress|default(False)
   with_items: "{{ apps }}"
 
