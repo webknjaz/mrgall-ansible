@@ -30,6 +30,8 @@
       ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDeKhCJlpM7GCjgDYLD8PQ66HmkQCU1zE7GgMBzXO1efK5nLanHk1ze2UXDuToqFsE+PcUjbyeVJRpNEMzHoBl3TGvDSP7D7KLsWLQr8O291JyrDwpvo5MvZOqDvnRs3SiXxxYOh93RL3+VRvZQR+0afBDyrWkW1zXR3aWbzevBl+roq96MapWidWfV5KdDehw1MC7DO4/PGybXNUSc7QPJfxUYO37l+324y5PoG1vNcFBcnpBkysTvbQPgmRLObFY5mLv6IF4Ss5ijn4aCfEhDWmmpDRAZpSEsurEMejKm3WOUbe4lygEhJ0XZ/CGcwlyaVOvlEHeIry+bXeGziEEudeOQxups1ogJ57gfmD+PXzroKu4rwmPmYijF536/GzeOv+U6ryH/7YSmJ7mLvc4hJhsWHexe0xq2o4BuSeXlCgyiAinSIiYnoU+BaCmi59JNgnYqKU8rnlCIkNVwHSIAu5pjdaA8mtJmLYFLDPAibTUZl+6Vzv1q7zXoKUjyCbmdj1jVPuwGyxCvVZRl7N+YiXjyrV9G2VDLzvjPQZVsuXTbjy3NFvD/NCeQu7gEd1Lmpy2yhh9kwHX8CJGIrJJMQ3yNDC4VAhLZI3LzobjzC1jiONINHyUtJ4lTIwsBMuE1l/KyMeT0ohp6v53Sv8HmoJ5o4B+UerpeSqonSl9ruQ== dokku app deployment key
     - name: mrgall
       ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFFzDPvc8875TegWwPNzBv1ZS21sEs+7XVvweFO6kUqOmWoThdlQBr4nTHIYXFVVvJ9VWmtL9sWjpJtK30xLRdsoe91N/9FyAZWQsN6pmPGU2MvUbKnaWGoa6q3s3uc6x2Vg/X9RcOlrDCxhvXzBY4xLQZGL8qRaeqvAQwH9yrpLeTK663QwLEjjardUVkQYe7CzaEJY/zAmdzDXUT0j0UnGK9LPjVU+CKiIyewIL7Cz+HDfucURysQDGINW3flVGH73Mf2RJOKYRaPaHrI97zDZGWPJptwGViQQikryZmJ58mhUhu2rYsuElIs0WVczJb8hCrfq3kcp7ps+JeVxRNKF0gqI3aqJ4mwM87KAB3Fiqr0Ho4LM3iIfm51/pL6XqknZSqKSzLxOXOV+G4pNQJ3QSXs8VcYSc/AYN6lR+cZtvTYt4s36vamUsgrMZP5YaJpDGsrI4HQz96Zm64p1LwAG7hU2nuVxMnun0z33SuySMVJZ8H6qK5q+wwMuI2qALs/rf+QDzIq0F0XiBYVK/9EAP38tNmE87zy6GCasOG3xhwfefLJxqI9jv9WeWyLCCIh9JKmb9NVBN3+Gqt9rzBR7c8dkKZAnORg6zsIv1VlDSXBWQBAlWeFj85nLx1nkVvKSd3oXiL1dNdDG/fg32q7KZMsVCO9d8GPZOPdBoWbQ== mrgall@home.mrgall.com
+    - name: anxolerd
+      ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCa6dp7HjTGThPb4LnwudMcqzIyOERL+mMDtjJ3Kq5YuBGDdBIHIhJBw9+ndvMAWGXWoGx2Kll7u6wMFeY9GtIWFUsTK7hnQRiOQs096bqXZD/Wq/+HwAsnRzL6jxwh76XacuWbeVjR1CxUL57rNZ7zPwzj2l8bxMFfC2kEM5zfsTXoJnHMvwy0i/9unNidF6tpBUSUOqUXDAjsVSbZCziGvS2ZTiQWoKKh9gzyBNZyllqFXhgGgF9/drmjNwpz9wFdQkct6qClzkB4EcB5fclGio2C9YY825MjHNxRV1h5mSQz2F6E9eyPa/nG5HDBDS2jYOwl1/MN6TH4t2KPO0VX anxolerd@anxolerd-laptop
 
   - role: dokku_apps
     mariadb_backup_dir: /var/lib/dokku/backups/mariadb
@@ -73,6 +75,7 @@
       acl_users: &gdg_acl_deployers
       - gdg-autodeployer-bot
       - wk
+      - anxolerd
       domains:
       - gdg.org.ua
       - www.gdg.org.ua
