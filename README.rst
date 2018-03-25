@@ -13,8 +13,8 @@ Install ansible and drop a vault password file inplace:
 .. code:: shell
    :number-lines:
 
-    $ pip install 'ansible>2.3.1'
-    $ vim .vault_pass
+    $ pip install 'ansible>=2.5.0'
+    $ vim .vault_pass  # ask for it from someone who has it
 
 Run:
 ----
@@ -22,4 +22,4 @@ Run:
 .. code:: shell
    :number-lines:
 
-    $ ansible-playbook -i hosts site.yaml  -e "ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_ssh_user=$USER"
+    $ ansible-playbook site.yaml -e "ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_ssh_user=$USER"
