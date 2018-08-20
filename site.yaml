@@ -207,9 +207,9 @@
 
   - import_role:
       name: ansible-role-rclone
+    become: yes
+    become_method: sudo
     vars:
-      become: yes
-      become_method: sudo
       rclone_config_file: /etc/rclone.conf
       # Configuration settings definition dictionary. You can copy it directly from
       # the rclone config file (I know, it requires you to setup it manually first
