@@ -1,0 +1,13 @@
+dokku_vhost: dokku.mrgall.com
+dokku_version: 0.9.4
+dokku_plugins:
+- name: acl
+  repo: https://github.com/dokku-community/dokku-acl.git
+- name: docker-options
+  repo: https://github.com/dyson/dokku-docker-options.git
+- name: letsencrypt
+  repo: https://github.com/dokku/dokku-letsencrypt.git
+- name: maintenance
+  repo: https://github.com/dokku/dokku-maintenance.git
+- name: mariadb
+  repo: https://github.com/dokku/dokku-mariadb.git
